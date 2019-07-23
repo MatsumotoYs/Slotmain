@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JOptionPane;
 
 public class Slotmain1 extends JFrame implements ActionListener, Runnable {
 
@@ -21,14 +22,14 @@ public class Slotmain1 extends JFrame implements ActionListener, Runnable {
 	JButton btnStop_1;
 	JButton btnStop_2;
 
-//	boolean stop = false;
+	//	boolean stop = false;
 	boolean stop1;
 	boolean stop2;
 	boolean stop3;
 
 	private JPanel contentPane;
 
-//	private Container ct;
+	//	private Container ct;
 
 	/**
 	 * Launch the application.
@@ -42,22 +43,24 @@ public class Slotmain1 extends JFrame implements ActionListener, Runnable {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JTextField textField_3;
+	private JButton btnExit;
 
 
 
 	public static void main(String[] args) {
 		Slotmain1 i = new Slotmain1("JAVAスロット");
 		i.setVisible(true);
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					Slotmain1 frame = new Slotmain1();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
+		//		EventQueue.invokeLater(new Runnable() {
+		//			public void run() {
+		//				try {
+		//					Slotmain1 frame = new Slotmain1();
+		//					frame.setVisible(true);
+		//				} catch (Exception e) {
+		//					e.printStackTrace();
+		//				}
+		//			}
+		//		});
 	}
 
 	/**
@@ -74,14 +77,14 @@ public class Slotmain1 extends JFrame implements ActionListener, Runnable {
 
 		btnStart = new JButton("Start");
 		btnStart.addActionListener(this);
-//		btnStart.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				if (e.getSource() == btnStart) {
-//					stop = false;
-//
-//				}
-//			}
-//		});
+		//		btnStart.addActionListener(new ActionListener() {
+		//			public void actionPerformed(ActionEvent e) {
+		//				if (e.getSource() == btnStart) {
+		//					stop = false;
+		//
+		//				}
+		//			}
+		//		});
 		btnStart.setBounds(160, 256, 110, 25);
 		contentPane.add(btnStart);
 
@@ -141,6 +144,22 @@ public class Slotmain1 extends JFrame implements ActionListener, Runnable {
 		contentPane.add(textField_2);
 		textField_2.setColumns(10);
 
+		textField_3 = new JTextField();		// スコア表示
+		textField_3.setHorizontalAlignment(JTextField.CENTER);
+		textField_3.setBounds(25, 34, 106, 22);
+		contentPane.add(textField_3);
+		textField_3.setColumns(10);
+
+		btnExit = new JButton("exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+			}
+		});
+		btnExit.setBounds(354, 267, 68, 25);
+		contentPane.add(btnExit);
+
+
 
 
 
@@ -148,16 +167,16 @@ public class Slotmain1 extends JFrame implements ActionListener, Runnable {
 
 	@Override
 	public void run() {
-//		ct = getContentPane();
+		//		ct = getContentPane();
 		textField.setFont(new Font("MS ゴシック",Font.BOLD,100));
 		textField_1.setFont(new Font("MS ゴシック",Font.BOLD,100));
 		textField_2.setFont(new Font("MS ゴシック",Font.BOLD,100));
 
 
 
-//		ct.add(textField, SwingConstants.CENTER);
-//		ct.add(textField_1, SwingConstants.CENTER);
-//		ct.add(textField_2, SwingConstants.CENTER);
+		//		ct.add(textField, SwingConstants.CENTER);
+		//		ct.add(textField_1, SwingConstants.CENTER);
+		//		ct.add(textField_2, SwingConstants.CENTER);
 
 		Random random = new Random();
 		int x = random.nextInt(list.length);
@@ -189,73 +208,85 @@ public class Slotmain1 extends JFrame implements ActionListener, Runnable {
 			if(!(stop2))textField_1.setText(Integer.toString(y));
 			if(!(stop3))textField_2.setText(Integer.toString(z));
 
+
+
 			if(stop1 && stop2 && stop3)	{
 				break;
 			}
+
 			try	{
 				Thread.sleep(200);
 			} catch (InterruptedException e1)	{
 
 			}
 
+
+
 		}
 
 
-//		// スロット処理
-//		while (true) {
-//			// テキストを描写
-//			textField.setText(list[x]);
-//			textField_1.setText(list[y]);
-//			textField_2.setText(list[z]);
-//
-//			// 終了フラグ判定(stopボタンが押されたら...)
-//			if (stop) {
-//				break;
-//
-//			}
-//
-//			try {
-//				Thread.sleep(300);
-//			} catch (InterruptedException e1) {
-//				// TODO 自動生成された catch ブロック
-//			}
-//
-//			x++;
-//			// リストの最後までいくと、0に戻す
-//			if (x == list.length) {
-//				x = 0;
-//			}
-//
-//			y++;
-//			if (y == list.length)	{
-//				y = 0;
-//			}
-//
-//			z++;
-//			if (z == list.length)	{
-//				z = 0;
-//			}
-//
-////			x = random.nextInt(list.length);
-////			y = random.nextInt(list.length);
-////			z = random.nextInt(list.length);
-////			x++;
-//
-//		}
-//	}
-//
-//
-//	@Override
-//	public void actionPerformed(ActionEvent e) {
-//		// TODO 自動生成されたメソッド・スタブ
-//		if (e.getSource() == btnStart) {
-//			stop = false;
-//			Thread th = new Thread(this);
-//			th.start();
-//		} else if (e.getSource() == btnStop) {
-//			stop = true;
-//
-//		}
+		if(textField.getText().equals(textField_1.getText()) && textField.getText().equals(textField_2.getText())){
+			JOptionPane.showMessageDialog(null, "当たり!!!!");
+		}else {
+			JOptionPane.showMessageDialog(null, "はずれ!");
+		}
+
+
+		//		// スロット処理
+		//		while (true) {
+		//			// テキストを描写
+		//			textField.setText(list[x]);
+		//			textField_1.setText(list[y]);
+		//			textField_2.setText(list[z]);
+		//
+		//			// 終了フラグ判定(stopボタンが押されたら...)
+		//			if (stop) {
+		//				break;
+		//
+		//			}
+		//
+		//			try {
+		//				Thread.sleep(300);
+		//			} catch (InterruptedException e1) {
+		//				// TODO 自動生成された catch ブロック
+		//			}
+		//
+		//			x++;
+		//			// リストの最後までいくと、0に戻す
+		//			if (x == list.length) {
+		//				x = 0;
+		//			}
+		//
+		//			y++;
+		//			if (y == list.length)	{
+		//				y = 0;
+		//			}
+		//
+		//			z++;
+		//			if (z == list.length)	{
+		//				z = 0;
+		//			}
+		//
+		////			x = random.nextInt(list.length);
+		////			y = random.nextInt(list.length);
+		////			z = random.nextInt(list.length);
+		////			x++;
+		//
+		//		}
+		//	}
+		//
+		//
+		//	@Override
+		//	public void actionPerformed(ActionEvent e) {
+		//		// TODO 自動生成されたメソッド・スタブ
+		//		if (e.getSource() == btnStart) {
+		//			stop = false;
+		//			Thread th = new Thread(this);
+		//			th.start();
+		//		} else if (e.getSource() == btnStop) {
+		//			stop = true;
+		//
+		//		}
 	}
 
 	@Override
@@ -271,8 +302,4 @@ public class Slotmain1 extends JFrame implements ActionListener, Runnable {
 		}
 
 	}
-
-
-
-
 }
