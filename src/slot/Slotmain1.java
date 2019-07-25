@@ -15,21 +15,18 @@ import javax.swing.JOptionPane;
 public class Slotmain1 extends JFrame implements ActionListener, Runnable {
 
 
-
-
 	JButton btnStart;
 	JButton btnStop;
 	JButton btnStop_1;
 	JButton btnStop_2;
 
-	//	boolean stop = false;
 	boolean stop1;
 	boolean stop2;
 	boolean stop3;
+	
+	int score = 0;
 
 	private JPanel contentPane;
-
-	//	private Container ct;
 
 	/**
 	 * Launch the application.
@@ -51,16 +48,6 @@ public class Slotmain1 extends JFrame implements ActionListener, Runnable {
 	public static void main(String[] args) {
 		Slotmain1 i = new Slotmain1("JAVAスロット");
 		i.setVisible(true);
-		//		EventQueue.invokeLater(new Runnable() {
-		//			public void run() {
-		//				try {
-		//					Slotmain1 frame = new Slotmain1();
-		//					frame.setVisible(true);
-		//				} catch (Exception e) {
-		//					e.printStackTrace();
-		//				}
-		//			}
-		//		});
 	}
 
 	/**
@@ -77,14 +64,6 @@ public class Slotmain1 extends JFrame implements ActionListener, Runnable {
 
 		btnStart = new JButton("Start");
 		btnStart.addActionListener(this);
-		//		btnStart.addActionListener(new ActionListener() {
-		//			public void actionPerformed(ActionEvent e) {
-		//				if (e.getSource() == btnStart) {
-		//					stop = false;
-		//
-		//				}
-		//			}
-		//		});
 		btnStart.setBounds(160, 256, 110, 25);
 		contentPane.add(btnStart);
 
@@ -167,21 +146,19 @@ public class Slotmain1 extends JFrame implements ActionListener, Runnable {
 
 	@Override
 	public void run() {
-		//		ct = getContentPane();
+
 		textField.setFont(new Font("MS ゴシック",Font.BOLD,100));
 		textField_1.setFont(new Font("MS ゴシック",Font.BOLD,100));
 		textField_2.setFont(new Font("MS ゴシック",Font.BOLD,100));
+		textField_3.setFont(new Font("MS ゴシック",Font.BOLD,18));
 
 
-
-		//		ct.add(textField, SwingConstants.CENTER);
-		//		ct.add(textField_1, SwingConstants.CENTER);
-		//		ct.add(textField_2, SwingConstants.CENTER);
 
 		Random random = new Random();
 		int x = random.nextInt(list.length);
 		int y = random.nextInt(list.length);
 		int z = random.nextInt(list.length);
+		
 
 		btnStop.setEnabled(true);
 		btnStop_1.setEnabled(true);
@@ -227,66 +204,13 @@ public class Slotmain1 extends JFrame implements ActionListener, Runnable {
 
 		if(textField.getText().equals(textField_1.getText()) && textField.getText().equals(textField_2.getText())){
 			JOptionPane.showMessageDialog(null, "当たり!!!!");
+			score = score + 5000;
+			textField_3.setText(Integer.toString(score));
 		}else {
 			JOptionPane.showMessageDialog(null, "はずれ!");
 		}
 
 
-		//		// スロット処理
-		//		while (true) {
-		//			// テキストを描写
-		//			textField.setText(list[x]);
-		//			textField_1.setText(list[y]);
-		//			textField_2.setText(list[z]);
-		//
-		//			// 終了フラグ判定(stopボタンが押されたら...)
-		//			if (stop) {
-		//				break;
-		//
-		//			}
-		//
-		//			try {
-		//				Thread.sleep(300);
-		//			} catch (InterruptedException e1) {
-		//				// TODO 自動生成された catch ブロック
-		//			}
-		//
-		//			x++;
-		//			// リストの最後までいくと、0に戻す
-		//			if (x == list.length) {
-		//				x = 0;
-		//			}
-		//
-		//			y++;
-		//			if (y == list.length)	{
-		//				y = 0;
-		//			}
-		//
-		//			z++;
-		//			if (z == list.length)	{
-		//				z = 0;
-		//			}
-		//
-		////			x = random.nextInt(list.length);
-		////			y = random.nextInt(list.length);
-		////			z = random.nextInt(list.length);
-		////			x++;
-		//
-		//		}
-		//	}
-		//
-		//
-		//	@Override
-		//	public void actionPerformed(ActionEvent e) {
-		//		// TODO 自動生成されたメソッド・スタブ
-		//		if (e.getSource() == btnStart) {
-		//			stop = false;
-		//			Thread th = new Thread(this);
-		//			th.start();
-		//		} else if (e.getSource() == btnStop) {
-		//			stop = true;
-		//
-		//		}
 	}
 
 	@Override
